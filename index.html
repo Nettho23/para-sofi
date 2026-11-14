@@ -90,6 +90,10 @@ h2{font-weight:400;font-style:italic;font-size:clamp(30px,8.6vw,42px);line-heigh
 figure{flex:0 0 min(74vw,300px);scroll-snap-align:center}
 figure div{padding:9px;background:#fff;box-shadow:0 10px 30px rgba(140,110,170,.22);border:1px solid rgba(195,160,101,.45)}
 figure img{display:block;width:100%;aspect-ratio:.6;object-fit:cover}
+.photo-fallback{width:100%;aspect-ratio:.6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;background:radial-gradient(circle at 23% 20%,#fff5fc 0,transparent 45%),radial-gradient(circle at 77% 82%,#e5d8ff 0,transparent 50%),linear-gradient(145deg,#f7e8f7,#dfebff);color:#8f72cf}
+.photo-fallback .flower-mark{font:400 72px/1 var(--serif);color:#c5a4dc;text-shadow:0 4px 16px rgba(165,120,195,.12)}
+.photo-fallback .photo-text{font:400 13px var(--body);letter-spacing:.24em;text-transform:uppercase;color:#987cb6}
+
 figcaption{font-style:italic;font-size:21px;line-height:1.2;margin-top:16px;padding:0 6px;text-wrap:balance}
 .swipe{font:400 11px var(--body);letter-spacing:.4em;text-transform:uppercase;color:var(--soft);margin-top:22px}
 
@@ -219,7 +223,9 @@ function center(el){ const r=el.getBoundingClientRect(); return {x:r.left+r.widt
   paper.addEventListener('click',function(){ if(typer) done(); });
   const S=$('strip');
   FOTOS.forEach(function(t,i){ const f=document.createElement('figure'), d=document.createElement('div'), im=document.createElement('img'), c=document.createElement('figcaption');
-    im.src='photos/'+(i+1)+'.jpg'; im.alt='Foto '+(i+1)+' de Sofi'; im.loading='lazy'; c.textContent=t; d.appendChild(im); f.appendChild(d); f.appendChild(c); S.appendChild(f); });
+    im.src='photos/'+(i+1)+'.jpg'; im.alt='Foto '+(i+1)+' de Sofi'; im.loading='lazy'; c.textContent=t;
+    im.addEventListener('error',function(){ if(!im.parentNode) return; const placeholder=document.createElement('div'); placeholder.className='photo-fallback'; const flower=document.createElement('span'); flower.className='flower-mark'; flower.textContent='✿'; const txt=document.createElement('span'); txt.className='photo-text'; txt.textContent='Sofi · 22'; placeholder.appendChild(flower); placeholder.appendChild(txt); im.replaceWith(placeholder); });
+    d.appendChild(im); f.appendChild(d); f.appendChild(c); S.appendChild(f); });
 })();
 
 /* ---------- pastel con 22 velitas ---------- */
@@ -420,9 +426,12 @@ requestAnimationFrame(frame);
 /* ---------- música ---------- */
 (function(){
   const au=$('song'), st=$('start'), sd=$('snd');
-  function play(){ try{ const p=au.play(); if(p&&p.catch) p.catch(function(){ sd.classList.add('off'); }); sd.classList.remove('off'); }catch(e){} }
-  st.addEventListener('click',function(){ play(); shower(); st.classList.add('gone'); sd.hidden=false; });
-  sd.addEventListener('click',function(){ if(au.paused) play(); else{ au.pause(); sd.classList.add('off'); } });
+  let unavailable=false;
+  function disableAudio(){ unavailable=true; sd.hidden=true; au.pause(); }
+  au.addEventListener('error',disableAudio);
+  function play(){ if(unavailable) return; try{ const p=au.play(); if(p&&p.catch) p.catch(disableAudio); sd.classList.remove('off'); }catch(e){ disableAudio(); } }
+  st.addEventListener('click',function(){ play(); shower(); st.classList.add('gone'); if(!unavailable) sd.hidden=false; });
+  sd.addEventListener('click',function(){ if(unavailable) return; if(au.paused) play(); else{ au.pause(); sd.classList.add('off'); } });
 })();
 
 /* ---------- aparecer al bajar ---------- */
