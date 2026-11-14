@@ -114,6 +114,31 @@ figcaption{font-style:italic;font-size:21px;line-height:1.2;margin-top:16px;padd
 /* La carta crece a medida que aparece el texto: sin altura artificial ni huecos */
 #carta{padding-bottom:26px}
 
+
+/* ---------- vales para Sofi ---------- */
+#carta{padding-bottom:18px}
+.vouchers{padding:36px 24px 44px}
+.vouchers .lead{max-width:360px;margin:0 auto 34px}
+.voucher-list{display:grid;gap:16px;margin:36px auto 0;max-width:470px}
+.voucher{position:relative;text-align:left;overflow:hidden;border:1px solid rgba(195,160,101,.50);border-radius:18px;background:linear-gradient(110deg,rgba(255,255,255,.97),rgba(252,240,250,.96));box-shadow:0 8px 22px rgba(145,109,173,.12)}
+.voucher:nth-child(3n+2){background:linear-gradient(110deg,#fff,#f0ebff)}
+.voucher:nth-child(3n){background:linear-gradient(110deg,#fff,#edf4ff)}
+.voucher::before,.voucher::after{content:"";position:absolute;top:63px;z-index:1;width:18px;height:18px;border-radius:50%;background:var(--paper);border:1px solid rgba(195,160,101,.5)}
+.voucher::before{left:-10px}.voucher::after{right:-10px}
+.voucher-trigger{display:flex;align-items:center;gap:16px;min-height:116px;padding:18px 22px;width:100%;background:none;border:0;color:var(--ink);cursor:pointer;text-align:left;font:inherit}
+.voucher-trigger:focus-visible{outline:2px solid #8f72cf;outline-offset:-5px}
+.voucher-symbol{flex:0 0 62px;width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:rgba(235,216,249,.65);font-size:30px}
+.voucher-copy{flex:1;min-width:0}
+.voucher-topline{display:block;color:var(--gold);font:400 10px var(--body);letter-spacing:.28em;text-transform:uppercase;margin-bottom:6px}
+.voucher-name{display:block;font:italic 400 clamp(22px,6.3vw,30px)/1.08 var(--serif)}
+.voucher-hint{display:block;font:400 11px var(--body);letter-spacing:.08em;color:var(--soft);margin-top:7px}
+.voucher-arrow{flex:0 0 19px;color:#9a79c8;font:400 24px var(--serif);transition:transform .35s ease}
+.voucher-trigger[aria-expanded="true"] .voucher-arrow{transform:rotate(45deg)}
+.voucher-detail{border-top:1px dashed rgba(195,160,101,.7);padding:17px 25px 20px;font:italic 400 21px/1.3 var(--serif);color:#806b9a;text-align:center}
+.voucher-detail[hidden]{display:none}
+.voucher-foot{font:400 11px var(--body);letter-spacing:.13em;color:var(--gold);text-align:center;margin-top:28px}
+@media(max-width:380px){.vouchers{padding-left:14px;padding-right:14px}.voucher-trigger{gap:11px;padding:16px}.voucher-symbol{flex-basis:50px;width:50px;height:50px;font-size:26px}}
+
 /* ---------- cierre ---------- */
 .end{padding-top:24px;padding-bottom:64px}
 .end h2{font:400 clamp(58px,18vw,88px)/1.15 var(--script);color:#8f72cf;margin:0 0 22px}
@@ -172,6 +197,65 @@ figcaption{font-style:italic;font-size:21px;line-height:1.2;margin-top:16px;padd
     <div class="paper" id="paper" hidden></div>
   </section>
 
+
+  <section class="vouchers" id="vales">
+    <div class="orn rv"><i></i></div>
+    <p class="eb rv">Seis pequeños planes</p>
+    <h2 class="rv">Vales que son solo para ti</h2>
+    <p class="lead rv">Porque también quiero regalarte momentos, no solo palabras. Toca cada vale para descubrirlo.</p>
+    <div class="voucher-list">
+      <article class="voucher rv">
+        <button class="voucher-trigger" type="button" aria-expanded="false" aria-controls="vale-helado">
+          <span class="voucher-symbol" aria-hidden="true">🍦</span>
+          <span class="voucher-copy"><span class="voucher-topline">Vale 01 de 06</span><span class="voucher-name">Un helado contigo</span><span class="voucher-hint">Toca para descubrir tu vale</span></span>
+          <span class="voucher-arrow" aria-hidden="true">+</span>
+        </button>
+        <p class="voucher-detail" id="vale-helado" hidden>Tú eliges el sabor. Yo pongo el helado y las ganas de pasar un rato contigo.</p>
+      </article>
+      <article class="voucher rv">
+        <button class="voucher-trigger" type="button" aria-expanded="false" aria-controls="vale-aguachile">
+          <span class="voucher-symbol" aria-hidden="true">🍤</span>
+          <span class="voucher-copy"><span class="voucher-topline">Vale 02 de 06</span><span class="voucher-name">Una miche sin alcohol y un aguachile</span><span class="voucher-hint">Toca para descubrir tu vale</span></span>
+          <span class="voucher-arrow" aria-hidden="true">+</span>
+        </button>
+        <p class="voucher-detail" id="vale-aguachile" hidden>Para disfrutar algo rico, algo picosito y una plática de esas que se alargan sin darnos cuenta.</p>
+      </article>
+      <article class="voucher rv">
+        <button class="voucher-trigger" type="button" aria-expanded="false" aria-controls="vale-cena">
+          <span class="voucher-symbol" aria-hidden="true">✨</span>
+          <span class="voucher-copy"><span class="voucher-topline">Vale 03 de 06</span><span class="voucher-name">Una cena especial</span><span class="voucher-hint">Toca para descubrir tu vale</span></span>
+          <span class="voucher-arrow" aria-hidden="true">+</span>
+        </button>
+        <p class="voucher-detail" id="vale-cena" hidden>Una noche para arreglarnos bonito, comer algo delicioso y disfrutar de estar juntos.</p>
+      </article>
+      <article class="voucher rv">
+        <button class="voucher-trigger" type="button" aria-expanded="false" aria-controls="vale-comida">
+          <span class="voucher-symbol" aria-hidden="true">🍽️</span>
+          <span class="voucher-copy"><span class="voucher-topline">Vale 04 de 06</span><span class="voucher-name">Una comida a tu gusto</span><span class="voucher-hint">Toca para descubrir tu vale</span></span>
+          <span class="voucher-arrow" aria-hidden="true">+</span>
+        </button>
+        <p class="voucher-detail" id="vale-comida" hidden>Escogemos un lugar que se te antoje y nos regalamos tiempo para platicar y reír.</p>
+      </article>
+      <article class="voucher rv">
+        <button class="voucher-trigger" type="button" aria-expanded="false" aria-controls="vale-elote">
+          <span class="voucher-symbol" aria-hidden="true">🌽</span>
+          <span class="voucher-copy"><span class="voucher-topline">Vale 05 de 06</span><span class="voucher-name">Un elote</span><span class="voucher-hint">Toca para descubrir tu vale</span></span>
+          <span class="voucher-arrow" aria-hidden="true">+</span>
+        </button>
+        <p class="voucher-detail" id="vale-elote" hidden>Para un antojo improvisado. Tú eliges cómo lo quieres y yo te acompaño.</p>
+      </article>
+      <article class="voucher rv">
+        <button class="voucher-trigger" type="button" aria-expanded="false" aria-controls="vale-pelis">
+          <span class="voucher-symbol" aria-hidden="true">🍿</span>
+          <span class="voucher-copy"><span class="voucher-topline">Vale 06 de 06</span><span class="voucher-name">Una tarde de pelis</span><span class="voucher-hint">Toca para descubrir tu vale</span></span>
+          <span class="voucher-arrow" aria-hidden="true">+</span>
+        </button>
+        <p class="voucher-detail" id="vale-pelis" hidden>Tú eliges la película, preparamos botanas y disfrutamos una tarde sin prisas.</p>
+      </article>
+    </div>
+    <p class="voucher-foot rv">Sin fecha de caducidad · Solo para Sofi ♡</p>
+  </section>
+
   <section class="end">
     <div class="orn rv"><i></i></div>
     <h2 class="rv">Feliz cumpleaños, amor</h2>
@@ -224,7 +308,7 @@ function center(el){ const r=el.getBoundingClientRect(); return {x:r.left+r.widt
     setTimeout(function(){ env.hidden=true; paper.hidden=false; paper.textContent='';
       requestAnimationFrame(function(){ paper.classList.add('show'); });
       if(RM){ done(); return; }
-      typer=setInterval(function(){ n=Math.min(full.length,n+5); paper.textContent=full.slice(0,n); if(n>=full.length) done(); },20); },1600); });
+      typer=setInterval(function(){ n=Math.min(full.length,n+3); paper.textContent=full.slice(0,n); if(n>=full.length) done(); },30); },1600); });
   paper.addEventListener('click',function(){ if(typer) done(); });
   const S=$('strip');
   FOTOS.forEach(function(t,i){ const f=document.createElement('figure'), d=document.createElement('div'), im=document.createElement('img'), c=document.createElement('figcaption');
@@ -438,6 +522,17 @@ requestAnimationFrame(frame);
   st.addEventListener('click',function(){ play(); shower(); st.classList.add('gone'); if(!unavailable) sd.hidden=false; });
   sd.addEventListener('click',function(){ if(unavailable) return; if(au.paused) play(); else{ au.pause(); sd.classList.add('off'); } });
 })();
+
+/* ---------- abrir y cerrar vales ---------- */
+document.querySelectorAll('.voucher-trigger').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    const detail=document.getElementById(btn.getAttribute('aria-controls'));
+    if(!detail) return;
+    const wasOpen=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded',String(!wasOpen));
+    detail.hidden=wasOpen;
+  });
+});
 
 /* ---------- aparecer al bajar ---------- */
 const rv=[].slice.call(document.querySelectorAll('.rv'));
